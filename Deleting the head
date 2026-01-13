@@ -1,0 +1,40 @@
+Node* deletingthehead(Node* a){
+    if(a==nullptr) return a;
+      Node* temp=a;
+      a=a->next;
+      delete(temp);
+      return a;
+}
+
+Node* deletethetail(Node* a){
+    if(a->next == nullptr || a== nullptr) {
+        delete(a);
+        return nullptr;
+    }
+
+    Node* temp=a;
+    while(temp->next->next !=nullptr){
+        temp=temp->next;
+    }
+    delete(temp->next);
+    temp->next=nullptr;
+    return a;
+
+}
+void print(Node* head){
+    Node* temp=head;
+    while(temp !=nullptr){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    
+}
+int main(){
+    // so first we will create a linked list out of a vector
+    vector<int> v={10,20,30,40,50};
+    Node* head=arr2ll(v);
+    head =deletethetail(head);
+    print(head);
+
+    return 0;
+}

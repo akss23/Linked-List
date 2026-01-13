@@ -1,0 +1,43 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int a){
+        data=a;
+        next=nullptr;
+    }
+    Node(int a,Node* b){
+        data=a;
+        next=b;
+    }
+};
+
+Node* arr2ll(vector<int> &a){
+    if(a.empty()) return nullptr;
+    Node* head= new Node(a[0]);
+    Node* mover=head;
+    for(int i=1;i<a.size();i++){
+        Node* temp= new Node(a[i]);
+        mover->next=temp;//address connected
+        mover=temp;
+    }
+    return head;
+};
+
+Node* deletingthehead(Node* a){
+    if(a==nullptr) return a;
+      Node* temp=a;
+      a=a->next;
+      delete(temp);
+      return a;
+}
+int main(){
+    // so first we will create a linked list out of a vector
+    vector<int> v={10,20,30,40,50};
+    Node* head=arr2ll(v);
+    return 0;
+}

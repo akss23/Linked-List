@@ -1,0 +1,32 @@
+Node* deletingk(Node* head, int k){
+    if(head==NULL) return head;
+    if(k==1){
+        Node* temp=head;
+        head=head->next;
+        delete(temp);
+        return head;
+    }
+    int cnt=0;
+    Node* temp=head;
+    Node* prev=NULL;
+    while(temp!=NULL){
+    
+    if(cnt==k){
+        prev->next=prev->next->next;
+        delete(temp);
+    }
+    cnt++;
+    prev=temp;
+    temp=temp->next;
+    }
+    return head;
+}
+int main(){
+    // so first we will create a linked list out of a vector
+    vector<int> v={10,20,30,40,50};
+    Node* head=arr2ll(v);
+    head =deletingk(head,4);
+    print(head);
+
+    return 0;
+}

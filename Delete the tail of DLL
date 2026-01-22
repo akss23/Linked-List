@@ -1,0 +1,67 @@
+#include<iostream> // here in this code we are practicing doubly linked list
+#include<vector>
+using namespace std;
+class Node{
+  public:
+  int data;
+  Node* next;
+  Node* back;
+   Node(int a, Node* b, Node* backk){
+       data=a;
+       next=b;
+       back=backk;
+   }
+   public:
+   Node(int a){
+    data=a;
+    next=nullptr;
+    back=nullptr;
+   }
+};
+Node* arr2DLL(vector<int> &a){
+    Node* head=new Node(a[0]);//never ever tamper the head
+    Node* prev=head;// copy the head as a reference
+    for(int i=1;i<a.size();i++){
+        Node* temp= new Node(a[i],nullptr,prev);
+        prev->next=temp;// pehle address join karwaya next wale se
+        prev=temp;// fir increment kiya prev ko
+    }
+    return head;
+}
+Node* deletehead(Node* head){
+    if(head==nullptr || head->next==nullptr){
+        return NULL;
+    }
+    Node* prev=head;
+    head=head->next;
+    head->back=nullptr;
+    prev->next=nullptr;
+    free(prev);
+    return head;
+}
+Node* deletetail(Node* head){
+    Node* tail=head;//copy the head as tail;
+    while(tail->next!=nullptr){
+        tail=tail->next;//move untill we find our last node
+    }
+    Node* newtail=tail->back;//so we're on our last node, now let us create secondlast node
+    newtail->next=nullptr;//now break the connection
+    tail->back=nullptr;//same here
+    delete(tail);//delete the last okay
+    return head;
+}
+void print(Node* head){
+        Node* temp=head;
+        while(temp !=NULL){
+            cout<<temp->data<<" ";
+            temp=temp->next;
+        }
+}
+int main(){
+    vector<int> v={10,12,16,14,15};
+    Node* head=arr2DLL(v);
+    //  head=deletehead(head);
+    head=deletetail(head);
+    print(head);
+    return 0;
+}
